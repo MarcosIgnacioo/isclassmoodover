@@ -39,6 +39,11 @@ func getClient(config *oauth2.Config, credentials *string) (*http.Client, *strin
 	return config.Client(context.Background(), tok), &tokenToStore
 }
 
+func GetTokenURL(config *oauth2.Config) *string {
+	authURL := config.AuthCodeURL("state-token", oauth2.AccessTypeOffline)
+	return &authURL
+}
+
 // Request a token from the web, then returns the retrieved token.
 func getTokenFromWeb(config *oauth2.Config) *oauth2.Token {
 	authURL := config.AuthCodeURL("state-token", oauth2.AccessTypeOffline)
